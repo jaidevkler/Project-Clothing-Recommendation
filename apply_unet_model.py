@@ -10,8 +10,10 @@ def apply_unet_model(path,image):
     img_array_org = img_to_array(image)
     # Add batch dimension
     img_array = np.expand_dims(img_array_org, axis=0)
+    img_array = img_array[...,:3]
     # Normalize the image
     img_array = img_array / 255.0
+
     # Predict image mask
     predicted_mask = model.predict(img_array)
     # Change dimension of the predicted mask   

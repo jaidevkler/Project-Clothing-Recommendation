@@ -8,7 +8,7 @@ def get_recommendations(item):
     # Load environment variables and API key
     load_dotenv()   
     # Create query for search
-    query = f"Shop for Women's sustainable {item}"
+    query = f"Shop for Women's {item}"
     # Search google shopping
     search = GoogleSearch({
         "q": query, 
@@ -26,6 +26,6 @@ def google_search(text):
     # Get recommendations
     recommendation = get_recommendations(text)
     # Filter recommendations
-    recommendation = recommendation[(recommendation['rating'] > 4) & (recommendation['reviews'] > 10)]
+    recommendation = recommendation[(recommendation['rating'] > 4) & (recommendation['reviews'] > 10)].reset_index(drop=True)
     # Return recommendation dataframe
     return recommendation

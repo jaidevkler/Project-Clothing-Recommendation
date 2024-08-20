@@ -10,6 +10,10 @@ def encode_image(image_path):
 
 
 def image_to_text(image_path, category):
+    if category == 'shoes':
+       f"{category} shoes color, type, length, fit, style. Message should only include these two details"
+    else:
+       f"{category} clothing color, type, length, fit, style. Message should only include these two details"
     # Load OpenAI api key
     load_dotenv() 
     api_key = os.getenv("OPENAI_API_KEY")
