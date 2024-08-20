@@ -1,12 +1,15 @@
+import streamlit as st
+
 from apply_unet_model import apply_unet_model
 from get_bounding_images import get_bounding_images
 from image_to_text import image_to_text
 from search_recommendations import google_search
+
 # Remove later
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 import numpy as np
 
-def main():
+def get_recommendations():
     # Model path where the model is saved
     model_path = '../Models/segmentation_model.h5'
     # Image path where test image is saved
@@ -29,16 +32,19 @@ def main():
       # Rund the iamge to text function with OpenAI
       texts.append(image_to_text(image_path, category))
     # List of recommendations
-    recommedations = []
+    recommendations = []
     # Loop through the texts and run a seach 
     for text in texts:
-       print(text)
-       recommedations.append(google_search(text))
+       recommendations.append(google_search(text))
+    # Return the list of recommendations
+    return recommendations
 
-
-    for recommendation in recommedations:
-       print(recommendation)
-
+def main():
+    # Get recommendations
+    recommendations = get_recommendations()
+    print(recommendations)
+    # Display header of streamlit app
+    #st.write("# Clothing Recommendation")
 
 if __name__ == "__main__":
   main()
