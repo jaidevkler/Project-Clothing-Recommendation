@@ -100,4 +100,5 @@ The project successfully segments clothing items from images and provides releva
 - This project was developed as part of the AI Bootcamp at Columbia Engineering.
 
 #Team
-Jaidev Kler, Christine Chung, Alan Khalili, Emmanuel Charles, Enock Mudzamiri, Grigoriy Isayev 
+Jaidev Kler, Christine Chung, Alan Khalili, Emmanuel Charles, Enock Mudzamiri, Grigoriy Isayev, Daniyar Temirkhanov
+ 
