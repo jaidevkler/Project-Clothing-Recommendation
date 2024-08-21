@@ -8,7 +8,8 @@ from apply_unet_model import apply_unet_model
 from get_bounding_images import get_bounding_images
 from image_to_text import image_to_text
 from search_recommendations import google_search
-#from gemini_image_to_text import gemini_image_to_text
+
+st.set_page_config(page_title="Let's Create Magic!", page_icon="✨")
 
 def get_recommendations(image, budget):
     image = image.resize((384, 384))
@@ -27,7 +28,6 @@ def get_recommendations(image, budget):
       # Create image path
       image_path = f"Output/images/{category}.png"
       # Rund the iamge to text function with OpenAI
-      #text = gemini_image_to_text(image_path, category)
       text = image_to_text(image_path, category)
       print(f'{category.capitalize()}: {text}')
       texts.append(text)
