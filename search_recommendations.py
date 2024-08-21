@@ -8,7 +8,7 @@ def get_recommendations(item):
     # Load environment variables and API key
     load_dotenv()   
     # Create query for search
-    query = f"Shop for Women's {item}"
+    query = f"Shop for {item}"#, Brand: Everlane"
     # Search google shopping
     search = GoogleSearch({
         "q": query, 
@@ -22,10 +22,16 @@ def get_recommendations(item):
     # Return recommendation
     return recommendations
 
-def google_search(text):
+def google_search(text,budget):
     # Get recommendations
     recommendation = get_recommendations(text)
+    # Add float price column
+    recommendation['float_price'] = recommendation['price'].apply(lambda x: float(x.replace('$','').replace(',','')))
+    recommendation = recommendation[(recommendation['float_price'] < float(budget)*1.25)]\
+                        .sort_values(by='float_price', ascending=False)\
+                        .reset_index(drop=True)
+    print(recommendation)
     # Filter recommendations
-    recommendation = recommendation[(recommendation['rating'] > 4) & (recommendation['reviews'] > 10)].reset_index(drop=True)
+    #recommendation = recommendation[(recommendation['rating'] > 4) & (recommendation['reviews'] > 10)].reset_index(drop=True)
     # Return recommendation dataframe
     return recommendation

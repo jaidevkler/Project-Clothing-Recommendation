@@ -10,10 +10,12 @@ def encode_image(image_path):
 
 
 def image_to_text(image_path, category):
-    if category == 'shoes':
-       text = f"{category} shoes color, type, length, fit, style. Message should only include these two details"
+    if category == 'upper':
+        text = f"{category.capitalize()} clothing gender, color, type, length, fit, style, details, accents, neckline, sleeve, pattern. Message should only include these details. Don't inlude none categories."
+    elif category == 'lower':
+       text = f"{category.capitalize()} clothing gender, color, type, length, fit, style, material/fabric, pattern, accents. Message should only include these details. Don't inlude none categories."
     else:
-       text = f"{category} clothing color, type, length, fit, style. Message should only include these two details"
+       text = f"{category.capitalize()} gender, color, brand, collection, type, style, material, toe shape, heel type, sole type, fastening, pattern, accents, purpose. Message should only include these details"
     # Load OpenAI api key
     load_dotenv() 
     api_key = os.getenv("OPENAI_API_KEY")
@@ -26,7 +28,8 @@ def image_to_text(image_path, category):
     }
     # Payload
     payload = {
-      "model": "gpt-4o-mini",
+      "model": "gpt-4o",
+      #"temperature": 0.0,
       "messages": [
         { 
           "role": "user",
@@ -48,6 +51,9 @@ def image_to_text(image_path, category):
     }
     # Response
     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
-
-    return response.json()['choices'][0]['message']['content'].replace('\n',', ')
-    
+    # Return the text
+    return category.capitalize() + response.json()['choices'][0]['message']['content']\
+                        .replace('*', '')\
+                        .replace('- ', ', ')\
+                        .strip()\
+                        .replace('\n',',')

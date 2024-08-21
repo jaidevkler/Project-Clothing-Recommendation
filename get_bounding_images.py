@@ -56,6 +56,13 @@ def create_bounding_images(bounding_boxes, labels, image):
     # Return
     return images, pixels
 
+def expand_bounding_box(x_min, y_min, x_max, y_max, dx, dy, image_width, image_height):
+    new_x_min = max(0, x_min - dx)
+    new_y_min = max(0, y_min - dy)
+    new_x_max = min(image_width, x_max + dx)
+    new_y_max = min(image_height, y_max + dy)
+    return new_x_min, new_y_min, new_x_max, new_y_max
+
 def get_middle_index(df):
     if len(df)%2 == 0:
         return int(len(df)/2)-1
@@ -67,6 +74,17 @@ def get_bounding_images(predicted_mask, image):
     num_classes = predicted_mask.max() + 1  
     # Create bounding boxes
     bounding_boxes = get_class_bounding_boxes(predicted_mask, num_classes)
+    # Empty dictionary to hold expanded bounding boxes
+    expanded_bounding_boxes = {}
+    # Expand bounding_boxes
+    for class_idx,box in bounding_boxes.items():
+        x_min, y_min, x_max, y_max = box
+        dx, dy = 10, 10  # Change this to the desired expansion
+        new_box = expand_bounding_box(x_min, y_min, x_max, y_max, dx, dy, 
+                                predicted_mask.shape[1], predicted_mask.shape[0])
+        expanded_bounding_boxes[class_idx] = new_box
+    # Update bounding boxes
+    bounding_boxes = expanded_bounding_boxes
     # Import labels
     labels = import_lables()
     # Get label names from bounding_boxes keys
@@ -84,15 +102,16 @@ def get_bounding_images(predicted_mask, image):
     # Loop through the images and save them to the list
     for category in bounding_categories:
         # Filter labels based on the category
-        filtered_labels = image_labels[(image_labels['category'] == category) & (image_labels['pixels'] > 3000)]
+        filtered_labels = image_labels[(image_labels['category'] == category)]
         # If labels exist for the category
         if len(filtered_labels) >= 1:
-            # Set label as the middle index
-            filtered_labels = filtered_labels.iloc[get_middle_index(filtered_labels)]
+            # Set label as the first index
+            filtered_labels = filtered_labels.iloc[0]
             # Save a copy of the image
             images[filtered_labels.name].save(f'Output/images/{category}.png')
             # Add image to list
             bounding_images.append(images[filtered_labels.name])
         else:
             Image.new('RGB', (10, 10)).save(f'Output/images/{category}.png')
+    # Return bounding categories
     return bounding_categories
