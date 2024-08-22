@@ -1,4 +1,3 @@
-import nltk
 # Import stopwords from the nltk corpus 
 from nltk.corpus import stopwords
 # Import tokenizers and pandas
