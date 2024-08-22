@@ -3,6 +3,8 @@
 **UNet Segmentation and Recommendation Pipeline - Project 3 group #7:**
 Jaidev Kler, Christine Chung, Alan Khalili, Emmanuel Charles, Enock Mudzamiri, Grigoriy Isayev, Daniyar Temirkhanov
 
+# UNet Segmentation and Recommendation Pipeline
+
 ## Project Overview
 
 This project presents a robust image segmentation pipeline utilizing a UNet model with a MobileNetV2 backbone. The solution is designed for high-performance image segmentation tasks, enabling detailed analysis and processing of visual data for applications in fashion retail and e-commerce. The pipeline integrates advanced machine learning techniques with cutting-edge APIs, providing a complete solution from model training to actionable insights and product recommendations.
@@ -154,6 +156,10 @@ The pipeline is built to be highly scalable and customizable:
 
 - **Scalability**: Capable of handling large datasets and can be parallelized across multiple GPUs.
 - **Customization**: Modular design allows easy integration of alternative models, datasets, and APIs based on specific industry requirements.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
