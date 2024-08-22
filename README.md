@@ -3,7 +3,6 @@
 **UNet Segmentation and Recommendation Pipeline - Project 3 group #7:**
 Jaidev Kler, Christine Chung, Alan Khalili, Emmanuel Charles, Enock Mudzamiri, Grigoriy Isayev, Daniyar Temirkhanov
 
-
 ## Project Overview
 
 This project presents a robust image segmentation pipeline utilizing a UNet model with a MobileNetV2 backbone. The solution is designed for high-performance image segmentation tasks, enabling detailed analysis and processing of visual data for applications in fashion retail and e-commerce. The pipeline integrates advanced machine learning techniques with cutting-edge APIs, providing a complete solution from model training to actionable insights and product recommendations.
@@ -81,44 +80,45 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 
 ### 1. Dataset Preparation
 
-**DatasetLoader**: Handles the end-to-end process of loading, preprocessing, and splitting the dataset into training and validation sets.
-
-- **Input**: Image and mask datasets.
-- **Output**: TensorFlow datasets ready for training.
+- **Imported images (1,000)**
+- **Resized and normalized images**
+- **Split images into training and testing sets**: 800 training and 200 testing.
+- **Data Augmentation**: Augmented the training images to increase them to 8,800.
 
 ### 2. Model Architecture
 
-**ModelBuilder**: Constructs the UNet model with a MobileNetV2 backbone optimized for image segmentation tasks.
+- **Created a U-Net model with down sampling and up sampling layers**: The model is capable of identifying 59 different clothing classes.
+- **Initial Model Training**: The model was fit with the training dataset, achieving an accuracy score of 0.86.
+- **Model Tuning**: The model was tuned to run for an additional 100 epochs, resulting in an improved accuracy score of 0.92.
 
-- **UNet Model**: Combines the strengths of the UNet architecture with the MobileNetV2 feature extractor for robust segmentation performance.
+### 3. Streamlit Application - Input
 
-### 3. Training and Fine-Tuning
+- **User Interface**: Created a front-end interface for the user with a drag-and-drop feature for image uploads.
+- **Mask Creation**: The uploaded image is processed using the trained U-Net model to create a mask.
+- **Text Inputs**: Two text boxes are provided for the user to enter their budget and any additional information.
 
-The model is trained using a combination of standard and fine-tuning phases. Early stopping and checkpointing are implemented to ensure the best model is saved.
+### 4. Get Bounding Images
 
-- **Initial Training**: Trains the model with a frozen backbone.
-- **Fine-Tuning**: Unfreezes the backbone and fine-tunes the model for additional epochs to improve performance.
+- **Bounding Box Function**: Uses the masks created by the model to generate bounding boxes for each identified clothing category.
+- **Cropped Images**: The function returns cropped images based on the bounding box locations.
 
-### 4. Image Segmentation and Prediction
+### 5. Image to Text
 
-The trained model is used to segment new images, identifying key regions (e.g., clothing items). The segmentation masks are processed to extract bounding boxes for each class.
+- **OpenAI GPT-4o Integration**: Used to input the bounding images along with relevant questions to create a description of each bounding image.
 
-- **Bounding Box Extraction**: Extracts bounding boxes from the predicted segmentation masks to isolate individual objects or regions.
+### 6. Natural Language Toolkit
 
-### 5. Integration with External APIs
+- **NLTK Integration**: Utilized the nltk library to remove stop words from the additional information provided by the user.
 
-**OpenAI API**: Generates descriptive information about segmented regions (e.g., clothing color, type, and length).
+### 7. Google Search
 
-**SerpApi Integration**: Retrieves product recommendations based on the segmented clothing items, enabling seamless e-commerce integration.
+- **SerpApi Integration**: Used Google SerpApi to search for products based on the image text and modified additional information.
+- **Filtering**: Results are filtered based on the user’s budget.
 
-- **Input**: Segmented images and descriptive metadata.
-- **Output**: Product recommendations and detailed analysis.
+### 8. Streamlit Application - Output
 
-### 6. Performance Monitoring
-
-**PerformanceReport**: Provides tools for evaluating the model's performance, including loss and accuracy plots and confusion matrix visualizations.
-
-- **Metrics**: Tracks key performance indicators such as accuracy, precision, recall, and F1-score.
+- **Recommendations**: The user is provided with recommendations for upper clothing, lower clothing, and shoes based on their inputs.
+- **Detailed Output**: The user receives an image of the recommended product, a hyperlink for more details, and the price of the product.
 
 ## Running the Project
 
