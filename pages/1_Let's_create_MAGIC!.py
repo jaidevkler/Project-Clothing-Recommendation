@@ -11,7 +11,7 @@ from search_recommendations import google_search
 
 st.set_page_config(page_title="Let's Create Magic!", page_icon="✨")
 
-def get_recommendations(image, budget):
+def get_recommendations(image, budget, additonal_info):
     image = image.resize((384, 384))
     # Model path where the model is saved
     model_path = '../Models/segmentation_model.h5'
@@ -35,10 +35,8 @@ def get_recommendations(image, budget):
     recommendations = []
     # Loop through the texts and run a seach 
     print('\nGetting search results...')
-    count=0
     for text in texts:
-       recommendations.append(google_search(text,budget[count]))
-       count+=1
+       recommendations.append(google_search(text, budget, additonal_info))
     # Return the list of recommendations
     return recommendations, categories
 
@@ -60,30 +58,23 @@ def main():
          st.write("#### ")
          st.write("#### ")
          st.write("#### ")
-         st.write("#### That's a really cool look!")
-         st.write("#### Let's see what we can find for you...")
+
+      st.write("#### I love that look! Let's see what we can find for you...")
       
       col1, col2, col3 = st.columns(3)
       
       with col1:
-        budget_upper = st.text_input(
-        "Upper Clothing budget: ",
+        budget = st.text_input(
+        "Approximate budget per item: ",
         "100",
         key="placeholder")
-      with col2:
-        budget_lower = st.text_input(
-        "Lower Clothing budget: ",
-        "100")
-      with col3:
-        budget_shoes = st.text_input(
-        "Shoes budget: ",
-        "100")
+
+      additonal_info = st.text_input("Any additional information you would like to share with us?", 
+                                     "I am looking for a casual outfit for a night out with friends.")
       if st.button("Let the magic begin", type="primary"):
-        budget = [float(budget_upper), float(budget_lower), float(budget_shoes)]
-        print(budget)
         with st.spinner('Wait for it...'):
           # Get recommendations
-          recommendations, categories = get_recommendations(image, budget)
+          recommendations, categories = get_recommendations(image, budget, additonal_info)
           # Displaying results
           print('\nDisplaying results...')
           # Loop through recommendations
