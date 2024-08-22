@@ -22,7 +22,11 @@ def get_recommendations(item):
     # Return recommendation
     return recommendations
 
-def google_search(text,budget):
+def google_search(text,budget,additional_info):
+    # Add additional information to the text
+    if additional_info is not '':
+        text = f"{text}, Additonal information: {additional_info}"
+        print(text)
     # Get recommendations
     recommendation = get_recommendations(text)
     # Add float price column
