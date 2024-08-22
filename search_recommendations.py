@@ -22,11 +22,13 @@ def get_recommendations(item):
     # Return recommendation
     return recommendations
 
-def google_search(text,budget,additional_info):
+def google_search(text,budget,additional_info, brand):
     # Add additional information to the text
-    if additional_info is not '':
-        text = f"{text}, Additonal information: {additional_info}"
+    if brand is not '':
+        text = f"Brand: {brand} {text}, Additonal information: {additional_info}"
         print(text)
+    else:
+        text = f"{text}, Additonal information: {additional_info}"
     # Get recommendations
     recommendation = get_recommendations(text)
     # Add float price column
@@ -34,7 +36,7 @@ def google_search(text,budget,additional_info):
     recommendation = recommendation[(recommendation['float_price'] < float(budget)*1.25)]\
                         .sort_values(by='float_price', ascending=False)\
                         .reset_index(drop=True)
-    print(recommendation)
+    #print(recommendation)
     # Filter recommendations
     #recommendation = recommendation[(recommendation['rating'] > 4) & (recommendation['reviews'] > 10)].reset_index(drop=True)
     # Return recommendation dataframe
