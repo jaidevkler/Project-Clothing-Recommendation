@@ -1,7 +1,13 @@
+
 ## CODE & COUTURE
+
+<p align="center">
+  <img src="./Resources/code&couture_logo.png" alt="Image Size Distribution" />
+</p>
 
 **UNet Segmentation and Recommendation Pipeline - Project 3 group #7:**
 Jaidev Kler, Christine Chung, Alan Khalili, Emmanuel Charles, Enock Mudzamiri, Grigoriy Isayev, Daniyar Temirkhanov
+
 
 # UNet Segmentation and Recommendation Pipeline
 
