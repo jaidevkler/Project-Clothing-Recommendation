@@ -1,0 +1,12 @@
+openai
+tensorflow
+streamlit
+time
+numpy
+resources
+labels.csv
+matplotlib
+sklearn
+serpapi
+langchain
+opencv
