@@ -31,7 +31,6 @@ def get_recommendations(image, budget, additonal_info, brands):
       # Rund the iamge to text function with OpenAI
       #text = image_to_text(image_path, category)
       text = gemini_image_to_text(image, category)
-      print(text)
       #print(f'{category.capitalize()}: {text}')
       texts.append(text)
     # List of recommendations
