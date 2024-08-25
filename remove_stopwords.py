@@ -3,6 +3,7 @@ from nltk.corpus import stopwords
 # Import tokenizers and pandas
 from nltk.tokenize import word_tokenize
 
+# Function to remove stop words
 def remove_stopwords(text):
     # Download the stopwords from the nltk package
     stop_words = set(stopwords.words('english'))
