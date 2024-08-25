@@ -32,7 +32,6 @@ def google_search(text,budget,additional_info, brand):
     else:
         text = f"Women's {text}, Additonal information: {additional_info}"
     # Get recommendations
-    print(text)
     recommendation = get_recommendations(text)
     # Add float price column
     recommendation['float_price'] = recommendation['price'].apply(lambda x: float(x.replace('$','').replace(',','')))
