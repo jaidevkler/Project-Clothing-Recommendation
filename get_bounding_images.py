@@ -4,6 +4,7 @@ import numpy as np
 
 from PIL import Image
 
+# Function to get the class of the bounding boxes
 def get_class_bounding_boxes(mask, num_classes):
     """
     Find bounding boxes for each class in the segmentation mask.
@@ -36,6 +37,7 @@ def get_class_bounding_boxes(mask, num_classes):
     # Return bounding boxes
     return bounding_boxes
 
+# Function to import the labels
 def import_lables():
     # Import labels from csv file
     labels = pd.read_csv('Resources/labels/labels.csv')
@@ -44,6 +46,7 @@ def import_lables():
     # Return labels dataframe
     return labels
 
+# Create bounding images function
 def create_bounding_images(bounding_boxes, labels, image):
     images=[]
     pixels = []
@@ -56,6 +59,7 @@ def create_bounding_images(bounding_boxes, labels, image):
     # Return
     return images, pixels
 
+# Expand the bounding box
 def expand_bounding_box(x_min, y_min, x_max, y_max, dx, dy, image_width, image_height):
     new_x_min = max(0, x_min - dx)
     new_y_min = max(0, y_min - dy)
@@ -63,12 +67,7 @@ def expand_bounding_box(x_min, y_min, x_max, y_max, dx, dy, image_width, image_h
     new_y_max = min(image_height, y_max + dy)
     return new_x_min, new_y_min, new_x_max, new_y_max
 
-def get_middle_index(df):
-    if len(df)%2 == 0:
-        return int(len(df)/2)-1
-    else:
-        return int((len(df) - 1)/2)
-
+# Get bounding images
 def get_bounding_images(predicted_mask, image):
     # Number of classes
     num_classes = predicted_mask.max() + 1  
