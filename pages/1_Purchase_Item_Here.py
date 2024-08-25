@@ -1,13 +1,10 @@
 import streamlit as st
 import requests
 from PIL import Image
-import io
-import numpy as np
 import google.generativeai as genai
 
 from apply_unet_model import apply_unet_model
 from get_bounding_images import get_bounding_images
-from image_to_text import image_to_text
 from search_recommendations import google_search
 from gemini_image_to_text import gemini_image_to_text
 
