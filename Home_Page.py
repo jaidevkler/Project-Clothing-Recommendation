@@ -6,13 +6,13 @@ st.set_page_config(
     page_icon="👋")
 
 # Create two columns
-col1, col2 = st.columns([3,7])
+col1, col2 = st.columns([4,7])
 # Logo
 with col1:  
     st.image("Resources/streamlit/logo.jpeg")
 # Welcome message
 with col2:
-    st.write("# Welcome to Code & Couture! 👋")
+    st.write("# Welcome to Code & Couture!")
 
 # Image of the team
 st.image('Resources/streamlit/team.png')
