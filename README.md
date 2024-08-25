@@ -22,6 +22,9 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 - **E-Commerce**: Enhance product search and recommendation engines by accurately identifying and categorizing products in images.
 - **Retail Analytics**: Leverage segmentation for in-store analytics such as shopper behavior analysis and shelf monitoring.
 
+## Presentation
+[Presentation Link](https://gamma.app/docs/Code-Couture-jdwj1w5dtjnhwal?mode=doc)
+
 ## Project Structure
 
 ```
@@ -151,17 +154,21 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 
 - Open the `clothing_segmentation.ipynb` notebook in Jupyter.
 - Follow the instructions in the notebook to preprocess the data and train the segmentation model.
-- The trained model will be saved in the `models` directory.
+- The trained model will be saved in the `Models` directory. A download link is also provided in resources above.
 
 ### Generating Clothing Recommendations
 
-- Open the `clothing_recommendation.ipynb` notebook.
-- Load the pre-trained model and run the cells to generate clothing recommendations based on segmented images.
+- Run the Home_Page.py with the streamlit application:
+```
+streamlit run Home_Page.py
+```
 
-### Visualization and Analysis
+### Purchase Item Here
 
-- Use the provided notebooks to visualize feature maps, Grad-CAM, and other aspects of the model to understand its behavior better.
-- Analyze the recommendations to evaluate the model's performance.
+- Select the Purchase Item Here tab. 
+- Drag and drop an image.
+- Input preference (budget, brands and additional information)
+- The application will display recommendations based on the inputs provided.
 
 ## Deployment
 
