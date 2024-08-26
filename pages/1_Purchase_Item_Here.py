@@ -1,7 +1,6 @@
 import streamlit as st
 import requests
 from PIL import Image
-import google.generativeai as genai
 
 from apply_unet_model import apply_unet_model
 from get_bounding_images import get_bounding_images
@@ -25,9 +24,11 @@ def get_recommendations(image, budget, additonal_info, brands):
     for category in categories:
       # Create image path
       image_path = f"Output/images/{category}.png"
+      # Open category image
+      category_image = Image.open(image_path)
+    
       # Rund the iamge to text function with OpenAI
-      #text = image_to_text(image_path, category)
-      text = gemini_image_to_text(image, category)
+      text = gemini_image_to_text(category_image, category)
       #print(f'{category.capitalize()}: {text}')
       texts.append(text)
     # List of recommendations

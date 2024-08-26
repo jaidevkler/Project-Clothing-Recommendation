@@ -1,6 +1,7 @@
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+from PIL import Image
 
 def gemini_image_to_text(image, category):
     if category == 'upper':
@@ -18,6 +19,7 @@ def gemini_image_to_text(image, category):
     model = genai.GenerativeModel('gemini-1.5-pro')
     # Get a response
     response = model.generate_content([image,text])
+    print(response)
     # Format and return the response
     return response.text\
             .replace('*', '')\
@@ -28,8 +30,10 @@ def gemini_image_to_text(image, category):
 # Main function for testing
 def main():
     image_path = "Output/images/shoes.png"
+    image = Image.open(image_path)
     category = "shoes"
-    print(gemini_image_to_text(image_path, category))
+    print(gemini_image_to_text(image, category))
+    
 
 if __name__ == "__main__":
     main()
