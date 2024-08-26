@@ -14,7 +14,7 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 ### Key Features
 - **High-Performance Segmentation**: Utilizes UNet architecture with MobileNetV2 for efficient and accurate segmentation suitable for real-time applications.
 - **Data Augmentation**: Comprehensive data augmentation techniques are employed to enhance model robustness and generalization.
-- **API Integration**: Seamless integration with OpenAI and SerpApi for enhanced data analysis and product recommendations.
+- **API Integration**: Seamless integration with Google Gemini and SerpApi for enhanced data analysis and product recommendations.
 - **Scalable and Modular**: Designed to be scalable and easily customizable for various industrial applications.
 
 ## Use Cases
@@ -23,7 +23,7 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 - **Retail Analytics**: Leverage segmentation for in-store analytics such as shopper behavior analysis and shelf monitoring.
 
 ## Presentation
-[Presentation Link](https://gamma.app/docs/Code-Couture-jdwj1w5dtjnhwal?mode=doc)
+[Gamma.app presentation Link](https://gamma.app/docs/Code-Couture-jdwj1w5dtjnhwal)
 
 ## Project Structure
 
@@ -74,6 +74,7 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 ### Prerequisites
 
 - Python 3.10+
+- Streamlit
 - OpenAI API Key
 - SerpApi Key
 
