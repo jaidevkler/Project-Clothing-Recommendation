@@ -3,6 +3,7 @@ from nltk.corpus import stopwords
 # Import tokenizers and pandas
 from nltk.tokenize import word_tokenize
 
+# Function to remove stop words
 def remove_stopwords(text):
     # Download the stopwords from the nltk package
     stop_words = set(stopwords.words('english'))
@@ -18,8 +19,6 @@ def main():
     sentence = 'I am looking for something casual to wear for a wedding. I am looking for a dress that is comfortable and not too formal'
     # Remove stopwords from the document
     filtered_text = remove_stopwords(sentence)
-    # Print the filtered text
-    print(filtered_text)
 
 if __name__ == '__main__':
     main()

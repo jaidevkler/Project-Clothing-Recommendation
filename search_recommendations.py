@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from serpapi import GoogleSearch
 
+# Get recommendation from google search
 def get_recommendations(item):
     # Load environment variables and API key
     load_dotenv()   
@@ -22,13 +23,14 @@ def get_recommendations(item):
     # Return recommendation
     return recommendations
 
+# Google search function
 def google_search(text,budget,additional_info, brand):
     # Add additional information to the text
-    if brand is not '':
-        text = f"Brand: {brand} {text}, Additonal information: {additional_info}"
+    if brand != '':
+        text = f"Women's Brand: {brand} {text}, Additonal information: {additional_info}"
         print(text)
     else:
-        text = f"{text}, Additonal information: {additional_info}"
+        text = f"Women's {text}, Additonal information: {additional_info}"
     # Get recommendations
     recommendation = get_recommendations(text)
     # Add float price column
@@ -36,8 +38,13 @@ def google_search(text,budget,additional_info, brand):
     recommendation = recommendation[(recommendation['float_price'] < float(budget)*1.25)]\
                         .sort_values(by='float_price', ascending=False)\
                         .reset_index(drop=True)
-    #print(recommendation)
-    # Filter recommendations
-    #recommendation = recommendation[(recommendation['rating'] > 4) & (recommendation['reviews'] > 10)].reset_index(drop=True)
+    
     # Return recommendation dataframe
     return recommendation
+
+# Main function for testin
+def main():
+    print(google_search('White adidas shoes - Stan Smith',100,'',''))
+
+if __name__ == '__main__':
+    main()

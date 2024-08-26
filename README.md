@@ -1,13 +1,9 @@
-
-## CODE & COUTURE
-
 <p align="center">
   <img src="./Resources/code&couture_logo.png" alt="Image Size Distribution" />
 </p>
 
 **UNet Segmentation and Recommendation Pipeline - Project 3 group #7:**
-Jaidev Kler, Christine Chung, Alan Khalili, Emmanuel Charles, Enock Mudzamiri, Grigoriy Isayev, Daniyar Temirkhanov
-
+Alan Khalili, Christine Chung, Daniyar Temirkhanov, Emmanuel Charles, Enock Mudzamiri, Grigoriy Isayev, Jaidev Kler,
 
 # UNet Segmentation and Recommendation Pipeline
 
@@ -26,24 +22,50 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 - **E-Commerce**: Enhance product search and recommendation engines by accurately identifying and categorizing products in images.
 - **Retail Analytics**: Leverage segmentation for in-store analytics such as shopper behavior analysis and shelf monitoring.
 
+## Presentation
+[Presentation Link](https://gamma.app/docs/Code-Couture-jdwj1w5dtjnhwal?mode=doc)
+
 ## Project Structure
 
 ```
 ├── Resources
 │   ├── images
 │   ├── masks
+│   ├── labels
+│   ├── streamlit
+│   ├── test_Images
 ├── notebooks
 │   ├── clothing_segmentation.ipynb
-│   ├── clothing_recommendation.ipynb
+│   ├── model_application.ipynb
+├── Python scrits
+│   ├── Home_Page.py
+│   ├── 1_Purchase_Item_Here.py
+│   ├── 2_Meet_the_Team.py
+│   ├── apply_unet_model.py
+│   ├── get_bounding_images.py
+│   ├── gemini_image_to_text.py
+│   ├── remove_stopwords.py
+│   ├── search_recommendations.py
 ├── models
 │   ├── model.h5
+├── Output
+│   ├── images
 ├── README.md
 ├── requirements.txt
 ```
 
-- **Resources**: Contains the dataset of images and masks used for training and validation.
-- **notebooks**: Jupyter notebooks with code for segmentation and recommendation tasks.
-- **models**: Directory where trained models are saved.
+- **Resources**: Contains the dataset of images and masks used for training and validation, mask labels, pictures for streamlit application and testing images.
+- **notebooks**: Jupyter notebooks with code for segmentation and model application (only used for testing).
+- **python scripts**:
+   - **Home_page.py**: Home page for the streamlit application. 
+   - **1_Purchase_Item_Here**: Steamlit application page to get user input (image, budget, brands and additional information) and provide recommendation output (images, links and pricing).
+   - **2_Meet_the_Team.py**: Project team details.
+   - **apply_unet_model.py**: U-Net model to create a mask of the image provided by the user.
+   - **get_bounding_images.py**: Create bounding images based on the image classes.
+   - **gemini_image_to_text.py**: Google Gemini API is used to covert the bounding images to text
+   - **remove_stopwords.py**: Remove stopwords from additional information provided by the user
+   - **serch_recommendations.py**: Google Shopping Search API is used to provide user with recommendations.
+- **models**: The model used for segmentation (This is not saved in repository due to size - [Download Link](https://drive.google.com/file/d/1RPzyZ2osZtuZ8gEyUZdKx37AXMfn0Tm0/view?usp=share_link))
 - **README.md**: This file, providing an overview of the project.
 - **requirements.txt**: Lists all Python packages required to run the project.
 
@@ -51,8 +73,7 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 
 ### Prerequisites
 
-- Python 3.8+
-- TensorFlow 2.x
+- Python 3.10+
 - OpenAI API Key
 - SerpApi Key
 
@@ -60,14 +81,13 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/unet-segmentation-pipeline.git
-   cd unet-segmentation-pipeline
+   git clone https://github.com/jaidevkler/Project-Clothing-Recommendation.git
    ```
 
 2. **Create a virtual environment:**
    ```sh
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   conda create -n couture python=3.10 anaconda -y
+   conda activate couture
    ```
 
 3. **Install required packages:**
@@ -77,12 +97,12 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 
 4. **Set up environment variables for API keys:**
    ```sh
-   export OPENAI_API_KEY="your-openai-api-key"
-   export SERPAPI_KEY="your-serpapi-key"
+   echo OPENAI_API_KEY="your-openai-api-key" >> .env
+   echo SERPAPI_KEY="your-serpapi-key" >> .env
    ```
 
-5. **Download or prepare the dataset:**
-   - Ensure that your dataset is placed in the `Resources/images` and `Resources/masks` directories.
+5. **Download and save the model:**
+   - Ensure that your model is downloaded and saved in a folder named Models, which is at the same level as the Project-Clothing-Reommendation folder.
 
 ## Pipeline Components
 
@@ -134,17 +154,21 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 
 - Open the `clothing_segmentation.ipynb` notebook in Jupyter.
 - Follow the instructions in the notebook to preprocess the data and train the segmentation model.
-- The trained model will be saved in the `models` directory.
+- The trained model will be saved in the `Models` directory. A download link is also provided in resources above.
 
 ### Generating Clothing Recommendations
 
-- Open the `clothing_recommendation.ipynb` notebook.
-- Load the pre-trained model and run the cells to generate clothing recommendations based on segmented images.
+- Run the Home_Page.py with the streamlit application:
+```
+streamlit run Home_Page.py
+```
 
-### Visualization and Analysis
+### Purchase Item Here
 
-- Use the provided notebooks to visualize feature maps, Grad-CAM, and other aspects of the model to understand its behavior better.
-- Analyze the recommendations to evaluate the model's performance.
+- Select the Purchase Item Here tab. 
+- Drag and drop an image.
+- Input preference (budget, brands and additional information)
+- The application will display recommendations based on the inputs provided.
 
 ## Deployment
 

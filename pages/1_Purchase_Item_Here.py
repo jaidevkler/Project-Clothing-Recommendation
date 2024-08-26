@@ -1,14 +1,14 @@
 import streamlit as st
 import requests
 from PIL import Image
-import io
-import numpy as np
+import google.generativeai as genai
 
 from apply_unet_model import apply_unet_model
 from get_bounding_images import get_bounding_images
-from image_to_text import image_to_text
 from search_recommendations import google_search
+from gemini_image_to_text import gemini_image_to_text
 
+# Function to get recommendations
 def get_recommendations(image, budget, additonal_info, brands):
     image = image.resize((384, 384))
     # Model path where the model is saved
@@ -26,7 +26,8 @@ def get_recommendations(image, budget, additonal_info, brands):
       # Create image path
       image_path = f"Output/images/{category}.png"
       # Rund the iamge to text function with OpenAI
-      text = image_to_text(image_path, category)
+      #text = image_to_text(image_path, category)
+      text = gemini_image_to_text(image, category)
       #print(f'{category.capitalize()}: {text}')
       texts.append(text)
     # List of recommendations
@@ -40,36 +41,33 @@ def get_recommendations(image, budget, additonal_info, brands):
     # Return the list of recommendations
     return recommendations, categories
 
+# Main function
 def main():
     st.set_page_config(page_title="Purchase Item Here", page_icon="✨")
     # Display header of streamlit app
-    st.write("# Code & Couture")
+    st.write("## Upload an image that inspires you!")
     # Image uploader
-    uploaded_file = st.file_uploader(label='Upload an image that inspires you!', type=['png', 'jpg'])
-
+    uploaded_file = st.file_uploader(label=' ', type=['png', 'jpg'])
+    # Once file is uploaded
     if uploaded_file is not None:
       # Get the image
       image = Image.open(uploaded_file)
       # Display the image
       col1, col2, col3 = st.columns([2,4,2])
-      
+      # Display centered image
       with col2:
         st.image(image)
-      with col3:
-         st.write("#### ")
-         st.write("#### ")
-         st.write("#### ")
-
-      st.write("#### I love that look! Let's see what we can find for you...")
-      
-      brands=[]
+      # Display message
+      st.write("#### Great choice! Let’s hunt down that fabulous look for you and make some magic happen!")
+      # Get user specified budget
       col1, col2, col3 = st.columns(3)
       with col1:
         budget = st.text_input(
         "Approximate budget per item in USD$: ",
         "100",
         key="placeholder")
-      
+      # Get user specified brands
+      brands=[]
       col1, col2, col3 = st.columns(3)
       with col1:
         brands.append(st.text_input(
@@ -83,10 +81,9 @@ def main():
         brands.append(st.text_input(
         "Brands you like for shoes: ",
         ""))
-      
-      additonal_info = st.text_input("Any additional information you would like to share with us?", 
-                                     "I am looking for a casual outfit for a night out with friends.")
-      
+      # Get any additional information that the user would like to provide
+      additonal_info = st.text_input("Any additional information you would like to share with us?")
+      # Create button to start the process
       if st.button("Purchase Item Here", type="primary"):
         with st.spinner('Wait for it...'):
           # Get recommendations
@@ -134,7 +131,6 @@ def main():
           st.success('Done!')
           st.balloons()       
           print('\nDone!')
-
 
 if __name__ == "__main__":
   main()
