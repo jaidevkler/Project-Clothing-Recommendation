@@ -1,0 +1,15 @@
+openai
+tensorflow
+streamlit
+time
+numpy
+resources
+nltk
+matplotlib
+sklearn
+serpapi
+langchain
+opencv
+python-dotenv
+tf-keras
+google-generativeai
