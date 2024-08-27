@@ -19,7 +19,6 @@ def gemini_image_to_text(image, category):
     model = genai.GenerativeModel('gemini-1.5-pro')
     # Get a response
     response = model.generate_content([image,text])
-    print(response)
     # Format and return the response
     return response.text\
             .replace('*', '')\
@@ -34,6 +33,5 @@ def main():
     category = "shoes"
     print(gemini_image_to_text(image, category))
     
-
 if __name__ == "__main__":
     main()
