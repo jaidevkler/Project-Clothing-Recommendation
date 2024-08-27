@@ -40,7 +40,6 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 ├── Python scrits
 │   ├── Home_Page.py
 │   ├── 1_Purchase_Item_Here.py
-│   ├── 2_Meet_the_Team.py
 │   ├── apply_unet_model.py
 │   ├── get_bounding_images.py
 │   ├── gemini_image_to_text.py
@@ -59,7 +58,6 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 - **python scripts**:
    - **Home_page.py**: Home page for the streamlit application. 
    - **1_Purchase_Item_Here**: Steamlit application page to get user input (image, budget, brands and additional information) and provide recommendation output (images, links and pricing).
-   - **2_Meet_the_Team.py**: Project team details.
    - **apply_unet_model.py**: U-Net model to create a mask of the image provided by the user.
    - **get_bounding_images.py**: Create bounding images based on the image classes.
    - **gemini_image_to_text.py**: Google Gemini API is used to covert the bounding images to text
