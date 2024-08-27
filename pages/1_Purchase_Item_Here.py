@@ -26,10 +26,8 @@ def get_recommendations(image, budget, additonal_info, brands):
       image_path = f"Output/images/{category}.png"
       # Open category image
       category_image = Image.open(image_path)
-    
-      # Rund the iamge to text function with OpenAI
-      text = gemini_image_to_text(category_image, category)
-      #print(f'{category.capitalize()}: {text}')
+      # Run the image to text function with Google Gemini
+      text = gemini_image_to_text(image, category)
       texts.append(text)
     # List of recommendations
     recommendations = []
