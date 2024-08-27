@@ -115,9 +115,6 @@ This project presents a robust image segmentation pipeline utilizing a UNet mode
 ### 2. Model Architecture
 
 - **Created a U-Net model with down sampling and up sampling layers**: The model is capable of identifying 59 different clothing classes.
-<p align="left">
-  <img src="./Output/plots/tuned_model.png" alt="Image Size Distribution" />
-</p>
 
 - **Initial Model Training**: The model was fit with the training dataset, achieving an accuracy score of 0.86.
 <p align="center">
